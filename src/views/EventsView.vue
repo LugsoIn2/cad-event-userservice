@@ -1,7 +1,6 @@
 
 <template>
   <main>
-    Event List:
     <EventList/>
   </main>
 </template>
