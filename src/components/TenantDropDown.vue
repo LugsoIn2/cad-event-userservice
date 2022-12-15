@@ -31,10 +31,25 @@ export default defineComponent({
 
 <template>
 
-  <vSelect v-model="selectedTenant" :options="store.availableTenants" @option:selected="setTenant" class="mb-4"/>
+  <vSelect id="mySelect" placeholder="Wähle deine Stadt aus" v-model="selectedTenant" :options="store.availableTenants" @option:selected="setTenant" class="mb-4"/>
 
 </template>
 
-<style scoped>
+<style>
+#mySelect .v-select .dropdown-toggle {
+   border: none;
+}
+#mySelect .vs__dropdown-toggle {
+  background-color: white;
+}
 
+#mySelect input {
+  color: black;
+}
+#mySelect .vs__dropdown-option {
+  color: black;
+}
+#mySelect .vs__dropdown-option--highlight {
+  color: white;
+}
 </style>

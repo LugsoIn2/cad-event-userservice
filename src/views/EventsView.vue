@@ -49,7 +49,7 @@ main {
   min-width: 50%;
 }
 body {
-    background-color: white;
+    background-color: rgb(230, 228, 228);
     min-height: 100vh;
     color: var(--color-text);
     transition: color 0.5s, background-color 0.5s;
