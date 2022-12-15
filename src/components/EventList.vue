@@ -1,11 +1,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { eventStore } from '@/stores/eventStore';
+import EventCard from './EventCard.vue';
 
 export default defineComponent({
   name: 'EventsList',
   components: {
-  },
+    EventCard
+},
   setup() {
     const store = eventStore();
     return { store };
@@ -14,9 +16,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div v-for="event in store.events">
-    {{ event.eventTitle }}
-  </div>
+  <EventCard v-for="event in store.events" :event="event"/>
 </template>
 
 <style scoped>
