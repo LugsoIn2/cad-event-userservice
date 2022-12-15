@@ -7,21 +7,34 @@ export const eventStore = defineStore({
   state: () =>
   ({
     events: null as WasGehtEvent[] | null,
-    availableTenants: null as String[] | null,
+    availableTenants: null as string[] | null,
+    selectedTenant: null as string | null,
+    selectedDay: null as string | null
   }),
   actions: {
-    async getEvents(city: String) {
-      const res = await fetch(`${import.meta.env.VITE_API_ENDPOINT}/events?city=${city}`);
+    async getEvents() {
+      let endpoint = `${import.meta.env.VITE_API_ENDPOINT}/events`;
+      endpoint += "?" + new URLSearchParams({
+        'city': this.selectedTenant ? this.selectedTenant!.toString() : "",
+        'date': this.selectedDay ? this.selectedDay.toString() : ""
+    }).toString();
+      const res = await fetch(endpoint);
       this.events = await res.json();
     },
     async getAvailableTenants() {
       // TODO: get tenants from event service or from environment variable?
       this.availableTenants = ['Konstanz', 'Tübingen'];
     },
-    setSelectedTenant(city: String) {
-      console.log(city);
-      router.replace({ name: "events", query: {city: city.trim()} });
-      this.getEvents(city);
+    setSelectedTenant(city: string) {
+      this.selectedTenant  = city;
+      this.setQueryParameter();
+    },
+    setSelectedDay(date: string) {
+      this.selectedDay = date.substring(0,10);
+      this.setQueryParameter();
+    },
+    setQueryParameter() {
+      router.replace({ name: "events", query: {city: this.selectedTenant, date: this.selectedDay} });
     }
   }
 });

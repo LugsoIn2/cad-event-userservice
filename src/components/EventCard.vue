@@ -11,15 +11,11 @@ export default {
     },
     data() {
         return {
-            eventDate: new Date(this.event.eventDate),
-            monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-            ]
+            eventDate:  new Date(this.event.eventDate),
+            monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
         }
     },
-    components: {
-
-    },
+    components: {},
 };
 </script>
 
@@ -29,19 +25,17 @@ export default {
             <div class="flex w-full">
                 <div class="flex flex-col items-center">
                     <div class="text-6xl">
-                        {{ eventDate.getDay() }}
+                        {{ eventDate.getDate()}}
                     </div>
                     <div>
-                        {{ monthNames[eventDate.getMonth()] }}
+                       {{ monthNames[eventDate.getMonth()] }}
                     </div>
                 </div>
-                <div class="flex flex-col justify-between ml-4">
+                <div class="flex flex-col justify-between mx-4">
                     <div>
                         <div class="font-bold"> {{ event.eventTitle }}</div>
                         <div class="italic"> {{ event.eventTimeString }}</div>
                     </div>
-
-
                     <div class=""> {{ event.eventLocation }}</div>
                 </div>
             </div>
@@ -49,7 +43,6 @@ export default {
             <div>
                 <img :src="event.eventPictureUrl" />
             </div>
-
         </div>
     </div>
 </template>

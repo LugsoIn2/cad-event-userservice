@@ -4,7 +4,11 @@
     <h1 className="text-3xl font-bold text-center	text-black mb-4">
       Was geht?
     </h1>
-    <TenantDropDown/>
+    <div class="flex flex-row justify-between">
+      <TenantDropDown class="w-2/5"/>
+      <Datepicker v-bind:enableTimePicker="false" placeholder="Datum" class="w-2/5" v-model="store.selectedDay" :autoApply="true" @update:model-value="setSelectedDay"/>
+    </div>
+    
     <EventList/>
   </main>
 </template>
@@ -14,12 +18,14 @@ import router from '@/router';
 import {eventStore} from '@/stores/eventStore';
 import EventList from '@/components/EventList.vue';
 import TenantDropDown from '@/components/TenantDropDown.vue';
-
+import Datepicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
 export default defineComponent({
   name: 'EventsView',
   components: {
     EventList,
-    TenantDropDown
+    TenantDropDown,
+    Datepicker
 },
   setup() {
     const store = eventStore();
@@ -31,16 +37,27 @@ export default defineComponent({
     };
   },
   mounted() {
-    const title = import.meta.env.VITE_API_ENDPOINT;
     const city = this.$route.query.city;
+    const dateString = this.$route.query.date;
     if (city) {
-      this.store.getEvents(city.toString());
-
+      this.store.setSelectedTenant(city.toString());
     }
+    if (dateString) {
+      this.store.setSelectedDay(dateString.toString());
+    }
+    this.store.getEvents();
+
   },
   methods: {
-   
-  },
+    setSelectedDay(value: Date) {
+      if (value) {
+        this.store.setSelectedDay(value.toISOString());
+      } else {
+        this.store.setSelectedDay('');
+      }
+      this.store.getEvents();
+    },
+  }
 });
 </script>
 

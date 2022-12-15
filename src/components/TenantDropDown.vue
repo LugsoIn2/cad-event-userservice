@@ -3,6 +3,7 @@ import { defineComponent } from 'vue';
 import { eventStore } from '@/stores/eventStore';
 // @ts-ignore
 import vSelect from "vue-select";
+import { storeToRefs } from 'pinia';
 
 export default defineComponent({
   name: 'TenantDropDown',
@@ -11,19 +12,30 @@ export default defineComponent({
   },
   data () {
     return {
-      "selectedTenant": this.$route.query.city
+      selectedTenant: ""
     };
   },
   async beforeCreate()  {
     await this.store.getAvailableTenants();
+    this.selectedTenant = this.store.selectedTenant ?this.store.selectedTenant.toString() : "";
   },
   setup() {
     const store = eventStore();
     return { store };
   },
   methods: {
-    setTenant(value: String) {
+    setTenant(value: string) {
       this.store.setSelectedTenant(value);
+      this.store.getEvents();
+    }
+  },
+  watch: {
+    selectedTenant: function(val, oldVal) {
+      if (val == null) {
+        this.store.setSelectedTenant("");
+      }
+      this.store.setSelectedTenant(val);
+      this.store.getEvents();
     }
   }
 });
@@ -31,7 +43,12 @@ export default defineComponent({
 
 <template>
 
-  <vSelect id="mySelect" placeholder="Wähle deine Stadt aus" v-model="selectedTenant" :options="store.availableTenants" @option:selected="setTenant" class="mb-4"/>
+  <vSelect 
+    id="mySelect"
+    placeholder="Stadt"
+    v-model="selectedTenant"
+    :options="store.availableTenants"
+    class="mb-4"/>
 
 </template>
 
