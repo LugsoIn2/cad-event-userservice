@@ -33,3 +33,15 @@ variable "evaluate_target_health" {
   default     = true
   description = "DNS healthy check from Route53"
 }
+
+variable "dist_directory" {
+  description = "path to dist dir"
+  type = string
+  default = "../../../dist"
+}
+
+variable "dist_assets_directory" {
+  description = "path to dist assets dir"
+  type = string
+  default = "../../../dist/assets"
+}

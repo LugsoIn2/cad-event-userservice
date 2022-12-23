@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
      bucket         = "cad-terraform-state-service"
-     key            = "env:/prod-userservice/terraform.tfstate"
+     key            = "terraform.tfstate"
      region         = "eu-central-1"
      dynamodb_table = "terraform_state"
    }
@@ -16,6 +16,8 @@ module "userservice_bucket" {
     source = "./../../modules/s3"
     bucket_name = local.concat_bucket_name
     s3_tags = var.tags
+    dist_directory = var.dist_directory
+    dist_assets_directory = var.dist_assets_directory
 }
 
 module "a_record_userservice" {
