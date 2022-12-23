@@ -49,6 +49,10 @@ npm run lint
 We use a terraform setup with global state management over AWS S3 Backend.
 The TF workspace for this service: prod-userservice
 
+### change workspace
+```sh
+terraform workspace select prod-userservice
+```
 ### Terraform AWS secrets for local testing
 add a file with the following content and name "secrets.auto.tfvars" in the directory ./terraform/prod/
 ```sh
