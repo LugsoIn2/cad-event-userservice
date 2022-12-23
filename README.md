@@ -44,3 +44,34 @@ npm run build
 ```sh
 npm run lint
 ```
+
+## Terraform using
+We use a terraform setup with global state management over AWS S3 Backend.
+The TF workspace for this service: prod-userservice
+
+### change workspace
+```sh
+terraform workspace select prod-userservice
+```
+
+### Terraform AWS secrets for local testing
+add a file with the following content and name "secrets.auto.tfvars" in the directory ./terraform/prod/
+```sh
+access_key = "id"
+secret_key = "secret_key"
+```
+
+### Terraform Infrastructure Variables
+in ./terraform/prod/s3_userservice/ .tfvars file or command input variable.
+(tags are optional)
+```sh
+bucket_name = "userservice"
+tags = {
+    "Environment" = "Prod"
+    }
+```  
+The name of the created bucket consists the workspace name and the variable "bucket_name".
+Are bucket_name a empty string only the workspace is used.
+
+
+ 

@@ -1,5 +1,15 @@
+terraform {
+  backend "s3" {
+     bucket         = "cad-terraform-state-service"
+     key            = "terraform.tfstate"
+     region         = "eu-central-1"
+     dynamodb_table = "terraform_state"
+   }
+}
+
 locals {
- concat_bucket_name = "${terraform.workspace}-${var.bucket_name}"
+ concat_bucket_name = var.bucket_name != "" ? "${terraform.workspace}-${var.bucket_name}" : "${terraform.workspace}"
+ #concat_bucket_name = "${terraform.workspace}-${var.bucket_name}"
 }
 
 module "userservice_bucket" {
