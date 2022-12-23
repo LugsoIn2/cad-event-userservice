@@ -16,13 +16,6 @@ variable "tags" {
     default = {}
 }
 
-variable "uid" {
-  description = "UID Variable"
-  type = string
-  default = ""
-  
-}
-
 variable "subdomainName" {
   description = "The Subdomain Name for the record"
   default = "example"
