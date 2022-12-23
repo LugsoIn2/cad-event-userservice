@@ -21,16 +21,16 @@ jobs:
           with: 
             repository: LugsoIn2/cad-terraform-all
             token: ${{ secrets.REPO_TOKEN }}
-            path: ./tf_general
+            path: ./tf_userservice
 
         - name: rsync files
           run: |
-            mkdir -p ./tf_general/tf_general
-            rsync -av ./localrepo/terraform/ ./tf_general/tf_general --delete
+            mkdir -p ./tf_userservice/tf_userservice
+            rsync -av ./localrepo/terraform/ ./tf_userservice/tf_userservice --delete
 
         - name: push cad-terraform-all repo
           run: |
-            cd ./tf_general/tf_general
+            cd ./tf_userservice/tf_userservice
             git add .
             git config user.name github-actions
             git config user.email github-actions@github.com
