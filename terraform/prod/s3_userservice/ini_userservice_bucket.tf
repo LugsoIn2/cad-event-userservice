@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
      bucket         = "cad-terraform-state-service"
-     key            = "terraform.tfstate"
+     key            = "env:/prod-userservice/terraform.tfstate"
      region         = "eu-central-1"
      dynamodb_table = "terraform_state"
    }
