@@ -10,12 +10,12 @@ on:
       Deploy_Production_github_account:
         description: 'GitHub Account Owner'
         required: true
-        default: ':LugsoIn2'
+        default: 'LugsoIn2'
 
       Deploy_Production_repo_github:
         description: 'repo-name'
         required: true
-        default: ':cad-terraform-all'
+        default: 'cad-terraform-all'
 
 jobs:
   build:
@@ -25,7 +25,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Test
         run: |
-          curl -X POST https://api.github.com/repos/:LugsoIn2/:cad-terraform-all/dispatches \
+          curl -X POST https://api.github.com/repos/LugsoIn2/cad-terraform-all/dispatches \
           -H 'Accept: application/vnd.github.everest-preview+json' \
           -u ${{ secrets.ACTIONS_KEY }} \
           --data '{"event_type": "Trigger Workflow", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'" }}'
