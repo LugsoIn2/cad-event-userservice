@@ -53,22 +53,8 @@ npm version patch -m "v%s"
 Only then the github release action are successfull.
 
 ## Terraform using
-We use a terraform setup with global state management over AWS S3 Backend.
-### change workspace
-```sh
-terraform workspace select <workspace>
-```
-### Terraform AWS secrets for local testing and v
-add a file with the following content and name "*.auto.tfvars" in the directory ./terraform/prod/ ... (tags are optional)
-```sh
-access_key = "id"
-secret_key = "secret_key"
-bucket_name = "userservice"
-tags = {
-    "Environment" = "Prod"
-    }
-```
-The name of the created bucket consists the workspace name and the variable "bucket_name".
-Are bucket_name a empty string only the workspace is used.
+One for all after refactor:
+
+[Terraform Repo](https://github.com/LugsoIn2/cad-terraform-all.git)
 
  
