@@ -1,0 +1,32 @@
+name: Trigger Deploy Terraform Repo
+on:
+  workflow_dispatch:
+     inputs:
+      Deploy_Production:
+        description: 'ًWorkflow on Terraform Repo which will triggered'
+        required: true
+        default: 'Deploy_Production'
+
+      Deploy_Production_github_account:
+        description: 'GitHub Account Owner'
+        required: true
+        default: ':LugsoIn2'
+
+      Deploy_Production_repo_github:
+        description: 'repo-name'
+        required: true
+        default: ':cad-terraform-all'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Test
+        run: |
+          curl -X POST https://api.github.com/repos/:LugsoIn2/:cad-terraform-all/dispatches \
+          -H 'Accept: application/vnd.github.everest-preview+json' \
+          -u ${{ secrets.ACTIONS_KEY }} \
+          --data '{"event_type": "Trigger Workflow", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'" }}'
+      - uses: actions/checkout@v3
