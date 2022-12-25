@@ -66,7 +66,4 @@ tags = {
 The name of the created bucket consists the workspace name and the variable "bucket_name".
 Are bucket_name a empty string only the workspace is used.
 
-
-
-
  
