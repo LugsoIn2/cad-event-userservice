@@ -45,13 +45,18 @@ npm run build
 npm run lint
 ```
 
+## Github Push on main
+please don't forget increase the version number.
+```sh
+npm version patch -m "v%s"
+```
+Only then the github release action are successfull.
+
 ## Terraform using
 We use a terraform setup with global state management over AWS S3 Backend.
-The TF workspace for this service: prod-userservice
-
 ### change workspace
 ```sh
-terraform workspace select prod-userservice
+terraform workspace select <workspace>
 ```
 ### Terraform AWS secrets for local testing and v
 add a file with the following content and name "*.auto.tfvars" in the directory ./terraform/prod/ ... (tags are optional)
