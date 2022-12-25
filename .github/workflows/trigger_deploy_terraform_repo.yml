@@ -6,9 +6,9 @@ on:
   workflow_dispatch:
      inputs:
       which_workflow:
-        description: 'ًWorkflow on Terraform Repo which will triggered'
+        description: 'ًWorkflow Name on Terraform Repo which will triggered'
         required: true
-        default: 'deploy_production.yml'
+        default: 'Deploy_Production'
 
       which_branch:
         description: 'Which branch'
@@ -24,4 +24,4 @@ jobs:
     steps:
       - name: GitHub CLI trigger command
         run: |
-          gh run list --workflow=${{ github.event.inputs.which_workflow }} --ref ${{ github.event.inputs.which_branch }}
+          gh workflow run ${{ github.event.inputs.which_workflow }} --repo https://github.com/LugsoIn2/cad-terraform-all.git --ref ${{ github.event.inputs.which_branch }}
