@@ -1,12 +1,15 @@
 
 <template>
-  <main class="px-4 w-full md:w-1/2 ">
-    <h1 className="text-3xl font-bold text-center	text-black mb-4">
-      Was geht?
+  <main class="px-4 w-full h-full md:w-1/2 ">
+    <h1 className="apptitle text-3xl font-bold text-center	text-black mb-4">
+      Was geht {{tenantEnvVariable}}?
     </h1>
-    <div class="flex flex-row justify-between">
-      <TenantDropDown class="w-2/5"/>
-      <Datepicker v-bind:enableTimePicker="false" placeholder="Datum" class="w-2/5" v-model="store.selectedDay" :autoApply="true" @update:model-value="setSelectedDay"/>
+    <div v-if="!eStore.isLoading" class="flex flex-row justify-center mb-5">
+      <TenantDropDown v-if="!tStore.tenant" class="w-2/5 mr-4"/>
+      <Datepicker v-bind:enableTimePicker="false" placeholder="Datum" class="w-2/5" v-model="eStore.selectedDay" :autoApply="true" @update:model-value="setSelectedDay"/>
+    </div>
+    <div v-else class="center">
+      Loading
     </div>
     
     <EventList/>
@@ -20,6 +23,7 @@ import EventList from '@/components/EventList.vue';
 import TenantDropDown from '@/components/TenantDropDown.vue';
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
+import { tenantStore } from '@/stores/tenantStore';
 export default defineComponent({
   name: 'EventsView',
   components: {
@@ -28,34 +32,34 @@ export default defineComponent({
     Datepicker
 },
   setup() {
-    const store = eventStore();
-    return { store };
+    const eStore = eventStore();
+    const tStore = tenantStore();
+    return { eStore, tStore };
   },
   data() {
     return {
-      
+      tenantEnvVariable: import.meta.env.VITE_TENANT
     };
   },
   mounted() {
     const city = this.$route.query.city;
     const dateString = this.$route.query.date;
     if (city) {
-      this.store.setSelectedTenant(city.toString());
+      this.eStore.setSelectedTenant(city.toString());
     }
     if (dateString) {
-      this.store.setSelectedDay(dateString.toString());
+      this.eStore.setSelectedDay(dateString.toString());
     }
-    this.store.getEvents();
-
+    this.eStore.getEvents();
   },
   methods: {
     setSelectedDay(value: Date) {
       if (value) {
-        this.store.setSelectedDay(value.toISOString());
+        this.eStore.setSelectedDay(value.toISOString());
       } else {
-        this.store.setSelectedDay('');
+        this.eStore.setSelectedDay('');
       }
-      this.store.getEvents();
+      this.eStore.getEvents();
     },
   }
 });
@@ -66,7 +70,6 @@ main {
   min-width: 50%;
 }
 body {
-    background-color: rgb(230, 228, 228);
     min-height: 100vh;
     color: var(--color-text);
     transition: color 0.5s, background-color 0.5s;
@@ -80,7 +83,11 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
 }
+.dp__pointer, .vs__dropdown-toggle {
+  height: 2.5rem;
+}
+
 
 </style>

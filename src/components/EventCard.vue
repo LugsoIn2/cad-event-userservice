@@ -11,7 +11,7 @@ export default {
     },
     data() {
         return {
-            eventDate:  new Date(this.event.eventDate),
+            eventDate: new Date(this.event.eventDate),
             monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
         }
     },
@@ -20,20 +20,20 @@ export default {
 </script>
 
 <template>
-    <div class="bg-white text-black rounded-xl mb-4 h-1/6 drop-shadow-lg">
+    <div class="card border rounded-xl mb-4 h-1/6 drop-shadow-lg">
         <div class="p-4 flex justify-between">
             <div class="flex w-full">
                 <div class="flex flex-col items-center">
                     <div class="text-6xl">
-                        {{ eventDate.getDate()}}
+                        {{ eventDate.getDate() }}
                     </div>
                     <div>
-                       {{ monthNames[eventDate.getMonth()] }}
+                        {{ monthNames[eventDate.getMonth()] }}
                     </div>
                 </div>
                 <div class="flex flex-col justify-between mx-4">
                     <div>
-                        <div class="font-bold"> {{ event.eventTitle }}</div>
+                        <div class="font-bold cardtitle"> {{ event.eventTitle }}</div>
                         <div class="italic"> {{ event.eventTimeString }}</div>
                     </div>
                     <div class=""> {{ event.eventLocation }}</div>
@@ -46,7 +46,3 @@ export default {
         </div>
     </div>
 </template>
-
-<style scoped>
-
-</style>

@@ -6,6 +6,7 @@ export const eventStore = defineStore({
   id: 'eventStore',
   state: () =>
   ({
+    isLoading: false,
     events: null as WasGehtEvent[] | null,
     availableTenants: null as string[] | null,
     selectedTenant: null as string | null,
@@ -13,6 +14,7 @@ export const eventStore = defineStore({
   }),
   actions: {
     async getEvents() {
+      this.isLoading = true;
       let endpoint = `${import.meta.env.VITE_API_ENDPOINT}/events`;
       endpoint += "?" + new URLSearchParams({
         'city': this.selectedTenant ? this.selectedTenant!.toString() : "",
@@ -20,6 +22,7 @@ export const eventStore = defineStore({
     }).toString();
       const res = await fetch(endpoint);
       this.events = await res.json();
+      this.isLoading = false;
     },
     async getAvailableTenants() {
       // TODO: get tenants from event service or from environment variable?
