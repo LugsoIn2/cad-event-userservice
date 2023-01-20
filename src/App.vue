@@ -5,7 +5,7 @@ const tStore = tenantStore();
 </script>
 
 <template>
-  <div class="h-full pt-4 pb-4 flex justify-center items-start"
+  <div class="w-full max-w-7xl h-full pt-4 pb-4 flex justify-center items-start"
     :class="[tStore.tenant?.theme_type === '2' ? 'theme3' : tStore.tenant?.theme_type === '1' ? 'theme2' : 'theme1']">
     <RouterView />
   </div>
