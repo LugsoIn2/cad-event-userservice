@@ -58,3 +58,7 @@ One for all after refactor:
 [Terraform Repo](https://github.com/LugsoIn2/cad-terraform-all.git)
 
  
+## ENV VARS
+VITE_API_ENDPOINT=
+VITE_ADMIN_API_ENDPOINT=
+VITE_CUSTOMER_ID=
