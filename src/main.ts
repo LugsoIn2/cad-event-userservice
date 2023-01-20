@@ -12,7 +12,7 @@ const app = createApp(App)
 app.use(createPinia())
 app.use(router);
 
-if (import.meta.env.VITE_TENANT) {
+if (import.meta.env.VITE_CUSTOMER_ID) {
     let tStore = tenantStore();
     tStore.getTenant().then(() => {
         app.mount('#app')

@@ -2,7 +2,7 @@
 <template>
   <main class="px-4 w-full h-full md:w-1/2 ">
     <h1 className="apptitle text-3xl font-bold text-center	text-black mb-4">
-      Was geht {{tenantEnvVariable}}?
+      Was geht {{tStore.tenant ? tStore.tenant!.city : ''}}?
     </h1>
     <div v-if="!eStore.isLoading" class="flex flex-row justify-center mb-5">
       <TenantDropDown v-if="!tStore.tenant" class="w-2/5 mr-4"/>
@@ -11,7 +11,6 @@
     <div v-else class="center">
       Loading
     </div>
-    
     <EventList/>
   </main>
 </template>
@@ -38,7 +37,7 @@ export default defineComponent({
   },
   data() {
     return {
-      tenantEnvVariable: import.meta.env.VITE_TENANT
+      customerIdEnvVariable: import.meta.env.VITE_CUSTOMER_ID
     };
   },
   mounted() {

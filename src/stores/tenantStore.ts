@@ -12,7 +12,7 @@ export const tenantStore = defineStore({
     async getTenant() {
       let endpoint = `${import.meta.env.VITE_ADMIN_API_ENDPOINT}/api/tenant`;
       endpoint += "?" + new URLSearchParams({
-        'tenant': import.meta.env.VITE_TENANT
+        'customer_nr': import.meta.env.VITE_CUSTOMER_ID
     }).toString();
       const res = await fetch(endpoint);
       this.tenant = await res.json();
