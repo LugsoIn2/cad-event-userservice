@@ -15,6 +15,11 @@ export default {
             monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
         }
     },
+    watch: {
+        event: function (val, oldVal) {
+            this.eventDate = new Date(this.event.eventDate);
+        }
+    },
     components: {},
 };
 </script>
