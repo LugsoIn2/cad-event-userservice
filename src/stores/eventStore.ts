@@ -8,7 +8,6 @@ export const eventStore = defineStore({
   ({
     isLoading: false,
     events: null as WasGehtEvent[] | null,
-    availableTenants: null as string[] | null,
     selectedTenant: null as string | null,
     selectedDay: null as string | null
   }),
@@ -23,10 +22,6 @@ export const eventStore = defineStore({
       const res = await fetch(endpoint);
       this.events = await res.json();
       this.isLoading = false;
-    },
-    async getAvailableTenants() {
-      // TODO: get tenants from event service or from environment variable?
-      this.availableTenants = ['Konstanz', 'Tübingen'];
     },
     setSelectedTenant(city: string) {
       this.selectedTenant  = city;

@@ -7,6 +7,7 @@ export const tenantStore = defineStore({
   state: () =>
   ({
     tenant: null as Tenant | null,
+    availableTenants: ['Konstanz']
   }),
   actions: {
     async getTenant() {
@@ -18,6 +19,11 @@ export const tenantStore = defineStore({
       this.tenant = await res.json();
       document.body.classList.add('theme_' + this.tenant?.theme_type);
     },
-
+    async getAvailableTenants() {
+      let endpoint = `${import.meta.env.VITE_ADMIN_API_ENDPOINT}/api/freetenants`;
+      const res = await fetch(endpoint);
+      let list = await res.json();
+      this.availableTenants = list;
+    },
   }
 });

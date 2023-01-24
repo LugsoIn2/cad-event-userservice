@@ -4,11 +4,11 @@
     <h1 className="apptitle text-3xl font-bold text-center	text-black mb-4">
       Was geht {{tStore.tenant ? tStore.tenant!.city : ''}}?
     </h1>
-    <div v-if="!eStore.isLoading" class="flex flex-row justify-center mb-5">
+    <div  class="flex flex-row justify-center mb-5">
       <TenantDropDown v-if="!tStore.tenant" class="w-2/5 mr-4"/>
       <Datepicker v-bind:enableTimePicker="false" placeholder="Datum" class="w-2/5" v-model="eStore.selectedDay" :autoApply="true" @update:model-value="setSelectedDay"/>
     </div>
-    <div v-else class="center">
+    <div v-if="eStore.isLoading" class="center">
       Loading
     </div>
     <EventList/>
