@@ -5,8 +5,8 @@ const tStore = tenantStore();
 </script>
 
 <template>
-  <div class="w-full max-w-7xl h-full pt-4 pb-4 flex justify-center items-start theme_0"
-    :class="[tStore.tenant?.theme_type === '2' ? 'theme3' : tStore.tenant?.theme_type === '1' ? 'theme2' : 'theme1']">
+  <div class="w-full max-w-7xl h-full pt-4 pb-4 flex justify-center items-start"
+    :class="[tStore.tenant?.theme_type === '2' ? 'theme_2' : tStore.tenant?.theme_type === '1' ? 'theme_1' : 'theme_0']">
     <RouterView />
   </div>
 </template>
@@ -25,9 +25,10 @@ const tStore = tenantStore();
 
 .theme_1 {
   background-color: #21252a;
+  color: white;
 }
 .theme_1 .card {
-    background-color: #21252a;
+    background-color: #30363c;
     border-color: white;
     box-shadow: 0px 5px 5px 5px rgba(0, 0, 0, 0.5);
     transform: translateY(-5px);

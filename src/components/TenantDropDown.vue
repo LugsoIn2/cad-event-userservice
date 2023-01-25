@@ -51,7 +51,7 @@ export default defineComponent({
     placeholder="Stadt"
     v-model="selectedTenant"
     :options="tenantsStore.availableTenants"
-    class="mb-4"/>
+    class="mb-4 cursor-pointer"/>
 
 </template>
 
@@ -65,6 +65,7 @@ export default defineComponent({
 
 #mySelect input {
   color: black;
+  cursor: pointer;
 }
 #mySelect .vs__dropdown-option {
   color: black;

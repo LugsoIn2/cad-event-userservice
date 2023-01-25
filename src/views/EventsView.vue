@@ -1,10 +1,10 @@
 
 <template>
-  <main class="px-4 w-full h-full md:w-1/2 ">
+  <main class="px-4 w-full h-full md:w-1/2 max-w-7xl ">
     <h1 className="apptitle text-3xl font-bold text-center	text-black mb-4">
       Was geht {{tStore.tenant ? tStore.tenant!.city : ''}}?
     </h1>
-    <div  class="flex flex-row justify-center mb-5">
+    <div class="flex flex-row justify-center mb-5">
       <TenantDropDown v-if="!tStore.tenant" class="w-2/5 mr-4"/>
       <Datepicker v-bind:enableTimePicker="false" placeholder="Datum" class="w-2/5" v-model="eStore.selectedDay" :autoApply="true" @update:model-value="setSelectedDay"/>
     </div>
@@ -86,6 +86,11 @@ body {
 }
 .dp__pointer, .vs__dropdown-toggle {
   height: 2.5rem;
+}
+
+.dp__main > div, .v-select {
+  border-radius: var(--vs-border-radius);
+  border: solid 1px black;
 }
 
 

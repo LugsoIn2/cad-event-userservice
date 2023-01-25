@@ -41,11 +41,12 @@ export default {
                         <div class="font-bold cardtitle"> {{ event.eventTitle }}</div>
                         <div class="italic"> {{ event.eventTimeString }}</div>
                     </div>
-                    <div class=""> {{ event.eventLocation }}</div>
+                    <div class=""> {{ (event.eventLocation == event.eventCity) ? '' : event.eventLocation }}</div>
+                    <div class=""> {{ event.eventCity }}</div>
                 </div>
             </div>
 
-            <div>
+            <div class="h-20 w-20">
                 <img :src="event.eventPictureUrl" />
             </div>
         </div>
