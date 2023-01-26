@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import type {WasGehtEvent} from '@/models/event';
 import router from '@/router';
+import { tenantStore } from './tenantStore';
 
 export const eventStore = defineStore({
   id: 'eventStore',
@@ -14,9 +15,10 @@ export const eventStore = defineStore({
   actions: {
     async getEvents() {
       this.isLoading = true;
+      const tStore = tenantStore();
       let endpoint = `${import.meta.env.VITE_API_ENDPOINT}/events`;
       endpoint += "?" + new URLSearchParams({
-        'city': this.selectedTenant ? this.selectedTenant!.toString() : "",
+        'city': tStore.tenant ? tStore.tenant.city : this.selectedTenant ? this.selectedTenant!.toString() : "",
         'date': this.selectedDay ? this.selectedDay.toString() : ""
     }).toString();
       const res = await fetch(endpoint);

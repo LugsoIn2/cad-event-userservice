@@ -30,7 +30,7 @@ export default {
             <div class="flex w-full">
                 <div class="flex flex-col items-center">
                     <div class="text-6xl">
-                        {{ eventDate.getDate() }}
+                        {{( "0" + eventDate.getDate()).slice(-2) }}
                     </div>
                     <div>
                         {{ monthNames[eventDate.getMonth()] }}
